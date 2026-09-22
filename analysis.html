@@ -5,101 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allocation Analysis</title>
 
+    <link rel="stylesheet" href="style.css">
+
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #f5f7ff, #eef4ff);
-            color: #24324a;
-        }
-
-        header {
-            background: linear-gradient(135deg, #243b75, #536dfe, #7658d9);
-            color: white;
-            padding: 45px 20px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(50,70,140,0.2);
-        }
-
-        header h1 {
-            margin: 0 0 10px;
-            font-size: 38px;
-        }
-
-        header p {
-            margin: 0;
-            font-size: 17px;
-            opacity: 0.9;
-        }
-
-        nav {
-            background: white;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 3px 15px rgba(31,78,121,0.08);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #315a9b;
-            font-weight: 600;
-            margin: 0 18px;
-        }
-
-        nav a:hover {
-            color: #6c4ce6;
-        }
-
-        h2 {
-            color: #315a9b;
-        }
-
-        .dashboard {
-            max-width: 1050px;
-            margin: 35px auto;
-            padding: 0 25px;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .card {
-            background: white;
-            padding: 28px 20px;
-            border-radius: 18px;
-            text-align: center;
-            box-shadow: 0 8px 25px rgba(56,82,140,0.10);
-            transition: 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h2 {
-            font-size: 32px;
-            color: #536dfe;
-            margin: 0 0 8px;
-        }
-
-        .card p {
-            color: #68758b;
-            margin: 0;
-        }
-
-        .section {
-            background: white;
-            max-width: 1050px;
-            margin: 25px auto;
-            padding: 28px;
-            border-radius: 18px;
-            box-shadow: 0 8px 25px rgba(56,82,140,0.08);
-        }
-
         .candidate-box {
             background: linear-gradient(135deg, #f0f4ff, #f7f2ff);
             padding: 22px;
@@ -112,7 +20,7 @@
             color: #40527a;
         }
 
-        .score {
+        .analysis-score {
             font-size: 40px;
             font-weight: bold;
             text-align: center;
@@ -120,7 +28,7 @@
             margin: 20px 0;
         }
 
-        .recommendation {
+        .analysis-recommendation {
             text-align: center;
             padding: 15px;
             background: white;
@@ -128,70 +36,35 @@
             font-size: 18px;
             font-weight: 600;
             color: #40527a;
-            box-shadow: 0 4px 12px rgba(50,70,120,0.08);
         }
 
-        table {
+        .analysis-table {
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
             overflow: hidden;
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(56,82,140,0.08);
         }
 
-        th {
+        .analysis-table th {
             background: linear-gradient(135deg, #536dfe, #6c63ff);
             color: white;
             padding: 16px;
             text-align: left;
         }
 
-        td {
+        .analysis-table td {
             padding: 15px;
             border-bottom: 1px solid #edf0f6;
             color: #4d5b72;
         }
 
-        tr:last-child td {
+        .analysis-table tr:last-child td {
             border-bottom: none;
         }
 
-        tr:hover td {
+        .analysis-table tr:hover td {
             background: #f7f8ff;
-        }
-
-        .empty-message {
-            text-align: center;
-            padding: 20px;
-            background: #fff8e6;
-            border-radius: 12px;
-            color: #80621b;
-        }
-
-        @media (max-width: 800px) {
-            .dashboard {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 500px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-
-            .section {
-                margin: 20px;
-                padding: 20px;
-            }
-
-            header h1 {
-                font-size: 30px;
-            }
-
-            nav a {
-                margin: 0 7px;
-            }
         }
     </style>
 </head>
@@ -204,8 +77,9 @@
 </header>
 
 <nav>
-    <a href="Internship.html">Internships</a>
-    <a href="Allocation.html">Allocation</a>
+    <a href="index.html">Home</a>
+    <a href="internship.html">Internships</a>
+    <a href="allocation.html">Allocation</a>
     <a href="analysis.html">Analysis</a>
 </nav>
 
@@ -239,19 +113,32 @@
 
     <div class="candidate-box">
 
-        <p><b>Candidate Name:</b> <span id="candidateName">Not available</span></p>
+        <p>
+            <b>Candidate Name:</b>
+            <span id="candidateName">Not available</span>
+        </p>
 
-        <p><b>Skills:</b> <span id="candidateSkills">Not available</span></p>
+        <p>
+            <b>Skills:</b>
+            <span id="candidateSkills">Not available</span>
+        </p>
 
-        <p><b>Education:</b> <span id="candidateEducation">Not available</span></p>
+        <p>
+            <b>Education:</b>
+            <span id="candidateEducation">Not available</span>
+        </p>
 
-        <p><b>Preferred Location:</b> <span id="candidateLocation">Not available</span></p>
+        <p>
+            <b>Preferred Location:</b>
+            <span id="candidateLocation">Not available</span>
+        </p>
 
-        <div class="score">
-            Matching Score: <span id="matchingScore">0</span>%
+        <div class="analysis-score">
+            Matching Score:
+            <span id="matchingScore">0</span>%
         </div>
 
-        <div class="recommendation" id="recommendation">
+        <div class="analysis-recommendation" id="recommendation">
             No recommendation available
         </div>
 
@@ -263,7 +150,7 @@
 
     <h2>Internship Distribution</h2>
 
-    <table>
+    <table class="analysis-table">
 
         <tr>
             <th>Internship Domain</th>
@@ -301,24 +188,24 @@
 
 <script>
 
-    document.getElementById("candidateName").textContent =
-        localStorage.getItem("candidateName") || "Not available";
+document.getElementById("candidateName").textContent =
+    localStorage.getItem("candidateName") || "Not available";
 
-    document.getElementById("candidateSkills").textContent =
-        localStorage.getItem("candidateSkills") || "Not available";
+document.getElementById("candidateSkills").textContent =
+    localStorage.getItem("candidateSkills") || "Not available";
 
-    document.getElementById("candidateEducation").textContent =
-        localStorage.getItem("candidateEducation") || "Not available";
+document.getElementById("candidateEducation").textContent =
+    localStorage.getItem("candidateEducation") || "Not available";
 
-    document.getElementById("candidateLocation").textContent =
-        localStorage.getItem("candidateLocation") || "Not available";
+document.getElementById("candidateLocation").textContent =
+    localStorage.getItem("candidateLocation") || "Not available";
 
-    document.getElementById("matchingScore").textContent =
-        localStorage.getItem("matchingScore") || "0";
+document.getElementById("matchingScore").textContent =
+    localStorage.getItem("matchingScore") || "0";
 
-    document.getElementById("recommendation").textContent =
-        localStorage.getItem("recommendation") ||
-        "No recommendation available";
+document.getElementById("recommendation").textContent =
+    localStorage.getItem("recommendation") ||
+    "No recommendation available";
 
 </script>
 
