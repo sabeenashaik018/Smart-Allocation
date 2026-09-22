@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Allocation Engine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+    <a href="Internship.html">Internships</a> |
+    <a href="Allocation.html">Allocation</a> |
+    <a href="Analysis.html">Analysis</a>
+</nav>
+
+<h1>Smart Allocation Engine</h1>
+
+<p>Enter student details to find the most suitable internship.</p>
+
+<label>Student Name:</label>
+<input type="text" id="name" placeholder="Enter name">
+
+<br><br>
+
+<label>Skill:</label>
+<select id="skill">
+    <option value="Java">Java</option>
+    <option value="Python">Python</option>
+    <option value="Web Development">Web Development</option>
+    <option value="AI/ML">AI/ML</option>
+</select>
+
+<br><br>
+
+<button onclick="allocate()">Find Best Internship</button>
+
+<div id="result"></div>
+
+<script>
+function allocate() {
+
+    let name = document.getElementById("name").value;
+    let skill = document.getElementById("skill").value;
+
+    if (name === "") {
+        document.getElementById("result").innerHTML =
+            "<h2>Please enter a student name.</h2>";
+        return;
+    }
+
+    let internship;
+    let reason;
+    let matchScore;
+
+    if (skill === "Java") {
+        internship = "Software Development Intern";
+        reason = "Java matches the technical requirements of software development.";
+        matchScore = 92;
+    } 
+    else if (skill === "Python") {
+        internship = "Data Analytics Intern";
+        reason = "Python is highly relevant to data analytics and programming.";
+        matchScore = 95;
+    } 
+    else if (skill === "Web Development") {
+        internship = "Web Development Intern";
+        reason = "Your web development skill matches the internship requirements.";
+        matchScore = 90;
+    } 
+    else {
+        internship = "AI/ML Intern";
+        reason = "Your AI/ML skill matches artificial intelligence requirements.";
+        matchScore = 94;
+    }
+
+    document.getElementById("result").innerHTML = `
+        <h2>Allocation Result</h2>
+
+        <p><strong>Student:</strong> ${name}</p>
+
+        <p><strong>Selected Skill:</strong> ${skill}</p>
+
+        <p><strong>Recommended Internship:</strong> ${internship}</p>
+
+        <p><strong>Match Score:</strong> ${matchScore}%</p>
+
+        <p><strong>Eligibility:</strong> Eligible</p>
+
+        <p><strong>Reason:</strong> ${reason}</p>
+    `;
+}
+</script>
+
+</body>
+</html>

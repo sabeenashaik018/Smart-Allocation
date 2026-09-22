@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Internship Opportunities</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav>
+    <a href="Internship.html">Internships</a> | 
+    <a href="Allocation.html">Allocation</a> |
+    <a href="Analysis.html">Analysis</a>
+</nav>
+
+<hr>    
+
+    <h1>Smart Allocation Engine</h1>
+
+<p>
+    Smart internship allocation system for the PM Internship Scheme.
+</p>
+
+<h2>Welcome</h2>
+
+<p>
+    Explore internships, allocate opportunities, and view allocation analysis.
+</p>
+
+    <p>Find internship opportunities based on your skills, education and preferences.</p>
+
+    <h2>Available Internships</h2>
+
+    <button onclick="showInternships()">View Internships</button>
+
+    <div id="internshipList"></div>
+
+    <script>
+        function showInternships() {
+            document.getElementById("internshipList").innerHTML = `
+                <h3>Available Opportunities</h3>
+                <ul>
+                    <li>Software Development Intern</li>
+                    <li>Data Analytics Intern</li>
+                    <li>AI/ML Intern</li>
+                    <li>Web Development Intern</li>
+                </ul>
+            `;
+        }
+    </script>
+
+</body>
+</html>
