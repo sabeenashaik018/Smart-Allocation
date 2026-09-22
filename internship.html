@@ -1,53 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Internship Opportunities</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PM Internship Opportunities</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <nav>
-    <a href="Internship.html">Internships</a> | 
-    <a href="Allocation.html">Allocation</a> |
-    <a href="Analysis.html">Analysis</a>
+<header>
+    <h1>PM Internship Opportunities</h1>
+    <p>Explore available internship domains</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="internship.html">Internships</a>
+    <a href="allocation.html">Allocation</a>
+    <a href="analysis.html">Analysis</a>
 </nav>
 
-<hr>    
-
-    <h1>Smart Allocation Engine</h1>
-
-<p>
-    Smart internship allocation system for the PM Internship Scheme.
-</p>
-
-<h2>Welcome</h2>
-
-<p>
-    Explore internships, allocate opportunities, and view allocation analysis.
-</p>
-
-    <p>Find internship opportunities based on your skills, education and preferences.</p>
+<div class="container">
 
     <h2>Available Internships</h2>
 
-    <button onclick="showInternships()">View Internships</button>
+    <div class="section">
+        <h2>Software Development</h2>
+        <p>
+            Work on software applications, programming,
+            databases and application development.
+        </p>
+    </div>
 
-    <div id="internshipList"></div>
+    <div class="section">
+        <h2>Data Analytics</h2>
+        <p>
+            Analyze data, identify useful patterns and
+            support data-driven decision making.
+        </p>
+    </div>
 
-    <script>
-        function showInternships() {
-            document.getElementById("internshipList").innerHTML = `
-                <h3>Available Opportunities</h3>
-                <ul>
-                    <li>Software Development Intern</li>
-                    <li>Data Analytics Intern</li>
-                    <li>AI/ML Intern</li>
-                    <li>Web Development Intern</li>
-                </ul>
-            `;
-        }
-    </script>
+    <div class="section">
+        <h2>AI / ML</h2>
+        <p>
+            Explore artificial intelligence, machine learning
+            and intelligent application development.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Web Development</h2>
+        <p>
+            Build responsive websites and web applications
+            using modern web technologies.
+        </p>
+    </div>
+
+</div>
 
 </body>
 </html>
