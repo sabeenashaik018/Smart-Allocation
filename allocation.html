@@ -1,94 +1,296 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Allocation Engine</title>
-    <link rel="stylesheet" href="style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7ff, #eef4ff);
+            color: #24324a;
+        }
+
+        header {
+            background: linear-gradient(135deg, #243b75, #536dfe, #7658d9);
+            color: white;
+            padding: 45px 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(50,70,140,0.2);
+        }
+
+        header h1 {
+            margin: 0 0 10px;
+            font-size: 38px;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 17px;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: white;
+            padding: 18px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(31,78,121,0.08);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #315a9b;
+            font-weight: 600;
+            margin: 0 18px;
+        }
+
+        nav a:hover {
+            color: #6c4ce6;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.96);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(56,82,140,0.1);
+        }
+
+        h2 {
+            color: #315a9b;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 14px;
+            margin: 9px 0;
+            border: 1px solid #d9e0ee;
+            border-radius: 10px;
+            background: #fafbff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #536dfe, #7b61ff);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(83,109,254,0.25);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        #allocationResult {
+            margin-top: 28px;
+            padding: 25px;
+            background: linear-gradient(135deg, #f0f4ff, #f7f2ff);
+            border-radius: 15px;
+            border: 1px solid #e1e5ff;
+        }
+
+        .score {
+            font-size: 42px;
+            font-weight: bold;
+            text-align: center;
+            margin: 25px 0;
+            color: #536dfe;
+        }
+
+        .recommendation {
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            color: #40527a;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            nav a {
+                margin: 0 7px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
+<header>
+    <h1>Smart Allocation Engine</h1>
+    <p>PM Internship Scheme</p>
+</header>
+
 <nav>
-    <a href="Internship.html">Internships</a> |
-    <a href="Allocation.html">Allocation</a> |
-    <a href="Analysis.html">Analysis</a>
+    <a href="Internship.html">Internships</a>
+    <a href="Allocation.html">Allocation</a>
+    <a href="analysis.html">Analysis</a>
 </nav>
 
-<h1>Smart Allocation Engine</h1>
+<div class="container">
 
-<p>Enter student details to find the most suitable internship.</p>
+    <h2>Allocation Analysis</h2>
 
-<label>Student Name:</label>
-<input type="text" id="name" placeholder="Enter name">
+    <p>Enter candidate details to analyze internship allocation.</p>
 
-<br><br>
+    <input
+        type="text"
+        id="candidateName"
+        placeholder="Candidate Name"
+    >
 
-<label>Skill:</label>
-<select id="skill">
-    <option value="Java">Java</option>
-    <option value="Python">Python</option>
-    <option value="Web Development">Web Development</option>
-    <option value="AI/ML">AI/ML</option>
-</select>
+    <input
+        type="text"
+        id="candidateSkills"
+        placeholder="Skills (e.g. Python, Java)"
+    >
 
-<br><br>
+    <select id="candidateEducation">
+        <option value="">Select Education</option>
+        <option value="CSE">Computer Science</option>
+        <option value="IT">Information Technology</option>
+        <option value="ECE">Electronics & Communication</option>
+    </select>
 
-<button onclick="allocate()">Find Best Internship</button>
+    <select id="candidateLocation">
+        <option value="">Preferred Location</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Remote">Remote</option>
+    </select>
 
-<div id="result"></div>
+    <button onclick="analyzeAllocation()">
+        Analyze Allocation
+    </button>
+
+    <div id="allocationResult"></div>
+
+</div>
 
 <script>
-function allocate() {
 
-    let name = document.getElementById("name").value;
-    let skill = document.getElementById("skill").value;
+function analyzeAllocation() {
 
-    if (name === "") {
-        document.getElementById("result").innerHTML =
-            "<h2>Please enter a student name.</h2>";
-        return;
+    const name = document.getElementById("candidateName").value;
+    const skills = document.getElementById("candidateSkills").value;
+    const education = document.getElementById("candidateEducation").value;
+    const location = document.getElementById("candidateLocation").value;
+
+    let score = 0;
+
+    if (skills.toLowerCase().includes("python")) {
+        score += 30;
     }
 
-    let internship;
-    let reason;
-    let matchScore;
+    if (skills.toLowerCase().includes("java")) {
+        score += 20;
+    }
 
-    if (skill === "Java") {
-        internship = "Software Development Intern";
-        reason = "Java matches the technical requirements of software development.";
-        matchScore = 92;
-    } 
-    else if (skill === "Python") {
-        internship = "Data Analytics Intern";
-        reason = "Python is highly relevant to data analytics and programming.";
-        matchScore = 95;
-    } 
-    else if (skill === "Web Development") {
-        internship = "Web Development Intern";
-        reason = "Your web development skill matches the internship requirements.";
-        matchScore = 90;
-    } 
+    if (education === "CSE") {
+        score += 25;
+    }
+
+    if (education === "IT") {
+        score += 20;
+    }
+
+    if (education === "ECE") {
+        score += 15;
+    }
+
+    if (location === "Hyderabad") {
+        score += 15;
+    }
+
+    if (location === "Bangalore") {
+        score += 10;
+    }
+
+    if (location === "Remote") {
+        score += 10;
+    }
+
+    if (score > 100) {
+        score = 100;
+    }
+
+    let recommendation;
+
+    if (score >= 80) {
+        recommendation = "Highly Suitable Internship Match";
+    }
+    else if (score >= 60) {
+        recommendation = "Good Internship Match";
+    }
+    else if (score >= 40) {
+        recommendation = "Moderate Internship Match";
+    }
     else {
-        internship = "AI/ML Intern";
-        reason = "Your AI/ML skill matches artificial intelligence requirements.";
-        matchScore = 94;
+        recommendation = "Low Internship Match";
     }
 
-    document.getElementById("result").innerHTML = `
-        <h2>Allocation Result</h2>
+    localStorage.setItem("candidateName", name);
+    localStorage.setItem("candidateSkills", skills);
+    localStorage.setItem("candidateEducation", education);
+    localStorage.setItem("candidateLocation", location);
+    localStorage.setItem("matchingScore", score);
+    localStorage.setItem("recommendation", recommendation);
 
-        <p><strong>Student:</strong> ${name}</p>
+    document.getElementById("allocationResult").innerHTML = `
 
-        <p><strong>Selected Skill:</strong> ${skill}</p>
+        <h2>Allocation Analysis</h2>
 
-        <p><strong>Recommended Internship:</strong> ${internship}</p>
+        <p><b>Candidate:</b> ${name || "Not provided"}</p>
 
-        <p><strong>Match Score:</strong> ${matchScore}%</p>
+        <p><b>Skills:</b> ${skills || "Not provided"}</p>
 
-        <p><strong>Eligibility:</strong> Eligible</p>
+        <p><b>Education:</b> ${education || "Not selected"}</p>
 
-        <p><strong>Reason:</strong> ${reason}</p>
+        <p><b>Preferred Location:</b> ${location || "Not selected"}</p>
+
+        <div class="score">
+            Matching Score: ${score}%
+        </div>
+
+        <div class="recommendation">
+            ${recommendation}
+        </div>
+
     `;
 }
+
 </script>
 
 </body>
